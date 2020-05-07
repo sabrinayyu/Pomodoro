@@ -1,0 +1,56 @@
+
+Test Case 1  		<single>
+   HTTP_Verb :  GET
+
+
+Test Case 2  		<error>
+   Id Parameter :  not present
+
+
+Test Case 3  		<error>
+   Firstname Parameter :  not present (POST)
+
+
+Test Case 4  		<error>
+   Firstname Length :  0 (POST)
+
+
+Test Case 5  		<error>
+   Lastname Parameter :  not present (POST)
+
+
+Test Case 6  		<error>
+   Lastname Length :  0 (POST)
+
+
+Test Case 7  		<error>
+   Email Parameter :  not present (POST)
+
+
+Test Case 8  		<error>
+   Email Length :  0 (POST)
+
+
+Test Case 9  		(Key = 2.1.1.1.2.1.2.1.2.)
+   HTTP_Verb           :  POST
+   Id Parameter        :  present
+   Id Length           :  0 (POST)
+   Firstname Parameter :  present
+   Firstname Length    :  > 0
+   Lastname Parameter  :  present
+   Lastname Length     :  > 0
+   Email Parameter     :  present
+   Email Length        :  > 0
+
+
+Test Case 10 		(Key = 2.1.2.1.2.1.2.1.2.)
+   HTTP_Verb           :  POST
+   Id Parameter        :  present
+   Id Length           :  > 0 (POST)
+   Firstname Parameter :  present
+   Firstname Length    :  > 0
+   Lastname Parameter  :  present
+   Lastname Length     :  > 0
+   Email Parameter     :  present
+   Email Length        :  > 0
+

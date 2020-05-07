@@ -1,0 +1,24 @@
+We will be using the latest, stable version (as of the date we start 
+development) of every external dependency.
+
+Language: Java
+    https://www.java.com/en/
+
+REST Framework: Spring Boot
+    https://spring.io/projects/spring-boot
+
+Testing Framework: JUnit, Spring Test
+    https://junit.org/junit5/
+    https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html
+
+Web Server: Tomcat (if not decided by DevOps team)
+    http://tomcat.apache.org
+
+Build System: Maven
+    https://maven.apache.org
+
+Database: MySQL
+    https://www.mysql.com
+
+Database API: JDBC
+    https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/

@@ -1,0 +1,74 @@
+
+Test Case 1  		<error>
+   UserID content :  invalid userId
+
+
+Test Case 2  		<error>
+   ProjectID content :  invalid projectId
+
+
+Test Case 3  		<error>
+   SessionID content :  invalid sessionId
+
+
+Test Case 4  		<single>
+   Id parameter :  not present
+
+
+Test Case 5  		<error>
+   Starttime parameter :  not present
+
+
+Test Case 6  		<error>
+   StartTime content :  invalid time format
+
+
+Test Case 7  		<error>
+   Endtime parameter :  not present
+
+
+Test Case 8  		<error>
+   EndTime content :  invalid time format
+
+
+Test Case 9  		<error>
+   Counter parameter :  not present
+
+
+Test Case 10 		<error>
+   Counter content :  not integer
+
+
+Test Case 11 		<error>
+   Counter content :  <0
+
+
+Test Case 12 		(Key = 1.1.1.1.1.1.1.2.1.2.1.3.)
+   HTTP_Verb           :  PUT
+   UserID content      :  valid userId
+   ProjectID content   :  valid projectId
+   SessionID content   :  valid sessionId
+   Id parameter        :  present
+   Id content          :  non empty
+   Starttime parameter :  present
+   StartTime content   :  valid time format
+   Endtime parameter   :  present
+   EndTime content     :  valid time format
+   Counter parameter   :  present
+   Counter content     :  >=0
+
+
+Test Case 13 		(Key = 1.1.1.1.1.2.1.2.1.2.1.3.)
+   HTTP_Verb           :  PUT
+   UserID content      :  valid userId
+   ProjectID content   :  valid projectId
+   SessionID content   :  valid sessionId
+   Id parameter        :  present
+   Id content          :  empty
+   Starttime parameter :  present
+   StartTime content   :  valid time format
+   Endtime parameter   :  present
+   EndTime content     :  valid time format
+   Counter parameter   :  present
+   Counter content     :  >=0
+

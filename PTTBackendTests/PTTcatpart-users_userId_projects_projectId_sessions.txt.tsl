@@ -1,0 +1,68 @@
+
+Test Case 1  		<error>
+   UserId Content :  invalid userId (GET)
+
+
+Test Case 2  		<error>
+   UserId Content :  invalid userId (POST)
+
+
+Test Case 3  		<error>
+   ProjectId Content :  invalid projectId (POST)
+
+
+Test Case 4  		<error>
+   ProjectId Content :  invalid projectId (GET)
+
+
+Test Case 5  		<error>
+   Starttime parameter :  not present (POST)
+
+
+Test Case 6  		<error>
+   Starttime Format :  invalid startTimeformat (POST)
+
+
+Test Case 7  		<error>
+   EndTime parameter :  not present (POST)
+
+
+Test Case 8  		<error>
+   EndTime Format :  invalid startTimeformat (POST)
+
+
+Test Case 9  		<error>
+   Counter parameter :  not present (POST)
+
+
+Test Case 10 		<error>
+   Counter content :  not integer (POST)
+
+
+Test Case 11 		<error>
+   Counter content :  <	0 (POST)
+
+
+Test Case 12 		(Key = 1.1.1.0.0.0.0.0.0.)
+   HTTP_Verb           :  GET
+   UserId Content      :  valid userId
+   ProjectId Content   :  valid projectId
+   Starttime parameter :  <n/a>
+   Starttime Format    :  <n/a>
+   EndTime parameter   :  <n/a>
+   EndTime Format      :  <n/a>
+   Counter parameter   :  <n/a>
+   Counter content     :  <n/a>
+
+
+Test Case 13 		(Key = 2.1.1.1.1.1.1.1.2.)
+   HTTP_Verb           :  POST
+   UserId Content      :  valid userId
+   ProjectId Content   :  valid projectId
+   Starttime parameter :  present
+   Starttime Format    :  valid startTimeformat
+   EndTime parameter   :  present
+   EndTime Format      :  valid startTimeformat
+   Counter parameter   :  present
+   Counter content     :  >= 0
+

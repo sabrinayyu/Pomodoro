@@ -1,0 +1,47 @@
+
+Test Case 1  		<error>
+   User Id Content :  invalid (POST)
+
+
+Test Case 2  		<error>
+   User Id Content :  invalid (GET)
+
+
+Test Case 3  		<error>
+   Project ID parameter :  not present (POST)
+
+
+Test Case 4  		<error>
+   Project Name parameter :  not present (POST)
+
+
+Test Case 5  		<error>
+   Project Name Length :  0 (POST)
+
+
+Test Case 6  		(Key = 1.1.0.0.0.0.)
+   HTTP_Verb              :  GET
+   User Id Content        :  valid
+   Project ID parameter   :  <n/a>
+   Project ID Length      :  <n/a>
+   Project Name parameter :  <n/a>
+   Project Name Length    :  <n/a>
+
+
+Test Case 7  		(Key = 2.1.1.1.1.2.)
+   HTTP_Verb              :  POST
+   User Id Content        :  valid
+   Project ID parameter   :  present
+   Project ID Length      :  0
+   Project Name parameter :  present
+   Project Name Length    :  non empty
+
+
+Test Case 8  		(Key = 2.1.1.2.1.2.)
+   HTTP_Verb              :  POST
+   User Id Content        :  valid
+   Project ID parameter   :  present
+   Project ID Length      :  non empty
+   Project Name parameter :  present
+   Project Name Length    :  non empty
+

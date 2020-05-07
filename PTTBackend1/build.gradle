@@ -1,0 +1,162 @@
+apply plugin: 'java'
+// apply plugin: 'eclipse'
+// apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.apache.httpcomponents:httpclient:4.5.5")
+    compile("org.skyscreamer:jsonassert:1.5.0")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.3")
+    testCompile('junit:junit:4.12')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['source', 'source-gen']
+            exclude 'main/**'
+        }
+        resources {
+            srcDirs = ['source', 'source-gen']
+            exclude 'main/**'
+        }
+    }
+}
+
+// task showCommandLineArgs {
+//     println "$baseUrl"
+// }
+//gradle build -PbaseUrl=http://localhost:8080/ptt
+
+//set a system property to update base URL of Junit tests
+// test {
+//     systemProperty "baseUrl", "$baseUrl"
+// }
+
+
+
+
+// task local {
+//     run { systemProperty "baseUrl", "$baseUrl" }
+// }
+//Base_BackendTests.mustRunAfter test
+
+task Base_BackendTests(type: Jar) {
+    // test {
+    //     System.setProperty 'baseUrl', '$baseUrl'
+    // }
+    //System.setProperty 'baseUrl', '$baseUrl'
+    //System.setProperty('baseUrl', '$baseUrl')
+    manifest {
+        attributes 'Implementation-Title': 'Test cases Jar File for Backend1',
+                   'Implementation-Version': '1.0.0'
+    }
+    baseName = 'Base_BackendTests'
+    from { configurations.testRuntime.collect { it.isDirectory() ? it : zipTree(it) } }
+    from sourceSets.test.output
+    with jar
+}
+
+task BackendTestsBackend1 (dependsOn: Base_BackendTests) {
+    // systemProperty "baseUrl", "$baseUrl"
+    // doFirst
+    //     {
+    //         //System.setProperty('baseUrl', '$baseUrl')
+    //         // test {
+    //         //     System.setProperty 'baseUrl', '$baseUrl'
+    //         // }
+    //         run {
+    //             //systemProperty 'baseUrl', '$baseUrl'
+    //             System.setProperty 'baseUrl', '$baseUrl'
+    //         }
+    //     }
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore', 'edu.gatech.cs6301.Backend1.users','edu.gatech.cs6301.Backend1.users_userId', 'edu.gatech.cs6301.Backend1.users_userId_projects','edu.gatech.cs6301.Backend1.users_userId_projects_projectId','edu.gatech.cs6301.Backend1.users_userId_projects_projectId_report','edu.gatech.cs6301.Backend1.users_userId_projects_projectId_sessions','edu.gatech.cs6301.Backend1.users_userId_projects_projectId_sessions_sessionId'
+        }
+    }
+}
+
+task BackendTestsBackend3 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore', 'edu.gatech.cs6301.Backend3.Users','edu.gatech.cs6301.Backend3.UsersUserId','edu.gatech.cs6301.Backend3.UsersUserIdProjects','edu.gatech.cs6301.Backend3.UsersUserIdProjectsProjectId','edu.gatech.cs6301.Backend3.UsersUserIdProjectsProjectIdReport','edu.gatech.cs6301.Backend3.UsersUserIdProjectsProjectIdSessions','edu.gatech.cs6301.Backend3.UsersUserIdProjectsProjectIdSessionsSessionId'
+
+        }
+    }
+}
+
+task BackendTestsBackend4 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore', 'edu.gatech.cs6301.Backend4.Users_userId_projectsIdTest','edu.gatech.cs6301.Backend4.Users_userId_projectsTest','edu.gatech.cs6301.Backend4.Users_userIdTest','edu.gatech.cs6301.Backend4.UsersTest', 'edu.gatech.cs6301.Backend4.Users_userId_projects_projectId_sessionsTest', 'edu.gatech.cs6301.Backend4.Users_userId_projects_projectId_sessions_sessionIdTest', 'edu.gatech.cs6301.Backend4.Users_userId_projects_projectId_reportTest'
+
+        }
+    }
+}
+
+task BackendTestsWeb1 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore','edu.gatech.cs6301.Web1.Users_userId_projects_projectId','edu.gatech.cs6301.Web1.Users_userId_projects','edu.gatech.cs6301.Web1.Users_userId','edu.gatech.cs6301.Web1.Users','edu.gatech.cs6301.Web1.Users_userId_projects_projectId_sessions','edu.gatech.cs6301.Web1.Users_userId_projects_projectId_sessions_sessionId','edu.gatech.cs6301.Web1.Users_userId_projects_projectId_report'
+
+        }
+    }
+}
+
+task BackendTestsWeb3 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore', 'edu.gatech.cs6301.Web3.UserIdTests','edu.gatech.cs6301.Web3.UsersTests','edu.gatech.cs6301.Web3.ProjectsTests','edu.gatech.cs6301.Web3.ProjectIdTests','edu.gatech.cs6301.Web3.SessionIdTests', 'edu.gatech.cs6301.Web3.SessionsTests', 'edu.gatech.cs6301.Web3.ReportTests'
+
+        }
+    }
+}
+
+task BackendTestsWeb4 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore', 'edu.gatech.cs6301.Web4.users_userid_project','edu.gatech.cs6301.Web4.users_userId_projects_projectId','edu.gatech.cs6301.Web4.users_userid','edu.gatech.cs6301.Web4.users','edu.gatech.cs6301.Web4.users_userId_projects_projectId_sessions','edu.gatech.cs6301.Web4.users_userId_projects_projectId_sessions_sessionId','edu.gatech.cs6301.Web4.users_userid_projects_projectid_reports'
+
+        }
+    }
+}
+
+task BackendTestsMobile1 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore', 'edu.gatech.cs6301.Mobile1.Users_userid_projects_projectid','edu.gatech.cs6301.Mobile1.Users_userId_projects','edu.gatech.cs6301.Mobile1.Users_userId','edu.gatech.cs6301.Mobile1.Users', 'edu.gatech.cs6301.Mobile1.Users_userid_projects_projectid_report', 'edu.gatech.cs6301.Mobile1.Users_userid_projects_projectid_sessions', 'edu.gatech.cs6301.Mobile1.Users_userid_projects_projectid_sessions_sessionId'
+
+        }
+    }
+}
+
+task BackendTestsMobile2 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore', 'edu.gatech.cs6301.Mobile2.PTTUsers','edu.gatech.cs6301.Mobile2.PTTUsersUserId','edu.gatech.cs6301.Mobile2.PTTUsersUserIdProjectsProjectId','edu.gatech.cs6301.Mobile2.PTTUserUserIdProjects','edu.gatech.cs6301.Mobile2.PTTUsersUserIdProjectsProjectIdReport','edu.gatech.cs6301.Mobile2.PTTUsersUserIdProjectsProjectIdSessions','edu.gatech.cs6301.Mobile2.PTTUsersUserIdProjectsProjectIdSessionsSessionId'
+
+        }
+    }
+}
+
+task BackendTestsDevOps12 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore','edu.gatech.cs6301.DevOps12.Users_get','edu.gatech.cs6301.DevOps12.Users_post','edu.gatech.cs6301.DevOps12.Users_userId_delete','edu.gatech.cs6301.DevOps12.Users_userId_get','edu.gatech.cs6301.DevOps12.Users_userId_projects_get','edu.gatech.cs6301.DevOps12.Users_userId_projects_post','edu.gatech.cs6301.DevOps12.Users_userId_projects_projectId_delete','edu.gatech.cs6301.DevOps12.Users_userId_projects_projectId_get','edu.gatech.cs6301.DevOps12.Users_userId_projects_projectId_put','edu.gatech.cs6301.DevOps12.Users_userId_put','edu.gatech.cs6301.DevOps12.Users_userId_projects_projectId_report_get','edu.gatech.cs6301.DevOps12.Users_userId_projects_projectId_sessions_get','edu.gatech.cs6301.DevOps12.Users_userId_projects_projectId_sessions_post','edu.gatech.cs6301.DevOps12.Users_userId_projects_projectId_sessions_sessionId_put'
+
+        }
+    }
+}
+
+task BackendTestsDevOps34 (dependsOn: Base_BackendTests) {
+    doLast {
+        exec {
+            commandLine 'java', '-cp', 'build/libs/Base_BackendTests.jar', 'org.junit.runner.JUnitCore', 'edu.gatech.cs6301.DevOps34.PTTBackendTests','edu.gatech.cs6301.DevOps34.Users_userId_projects_projectId','edu.gatech.cs6301.DevOps34.Users_userId_projects','edu.gatech.cs6301.DevOps34.Users_userId','edu.gatech.cs6301.DevOps34.Users','edu.gatech.cs6301.DevOps34.Users_userId_projects_projectId_report','edu.gatech.cs6301.DevOps34.Users_userId_projects_projectId_sessions','edu.gatech.cs6301.DevOps34.Users_userId_projects_projectId_sessions_sessionId'
+
+        }
+    }
+}

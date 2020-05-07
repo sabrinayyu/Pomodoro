@@ -1,0 +1,38 @@
+# /users/{userId}:
+HTTP_Verb:
+	GET. 	
+	PUT. 									[property put]
+	DELETE.
+
+User Id Content:
+	valid userid. 
+	invalid userid (GET). 					[error]
+	invalid userid (PUT). 					[error]
+	invalid userid (DELETE). 					[error]
+	
+# FirstName:
+Firstname parameter:
+	present.								[if put]
+	not present (PUT). 						[error]
+
+Firstname Length:
+	0 (PUT). 								[error]
+	> 0. 									[if put] 
+
+#LastName
+Lastname parameter:
+	present.								[if put]
+	not present (PUT). 						[error]
+
+Lastname Length:
+	0 (PUT). 								[error]
+	> 0. 									[if put] 
+
+#Email:
+Email parameter:
+	present. 								[if put]
+	not present (PUT). 						[single]
+
+Email Length:
+	0 (PUT). 								[single]
+	> 0. 									[if put] 

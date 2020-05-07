@@ -1,0 +1,69 @@
+
+Test Case 1  		<error>
+   User Id Content :  invalid userid (GET)
+
+
+Test Case 2  		<error>
+   User Id Content :  invalid userid (PUT)
+
+
+Test Case 3  		<error>
+   User Id Content :  invalid userid (DELETE)
+
+
+Test Case 4  		<error>
+   Firstname parameter :  not present (PUT)
+
+
+Test Case 5  		<error>
+   Firstname Length :  0 (PUT)
+
+
+Test Case 6  		<error>
+   Lastname parameter :  not present (PUT)
+
+
+Test Case 7  		<error>
+   Lastname Length :  0 (PUT)
+
+
+Test Case 8  		<single>
+   Email parameter :  not present (PUT)
+
+
+Test Case 9  		<single>
+   Email Length :  0 (PUT)
+
+
+Test Case 10 		(Key = 1.1.0.0.0.0.0.0.)
+   HTTP_Verb           :  GET
+   User Id Content     :  valid userid
+   Firstname parameter :  <n/a>
+   Firstname Length    :  <n/a>
+   Lastname parameter  :  <n/a>
+   Lastname Length     :  <n/a>
+   Email parameter     :  <n/a>
+   Email Length        :  <n/a>
+
+
+Test Case 11 		(Key = 2.1.1.2.1.2.1.2.)
+   HTTP_Verb           :  PUT
+   User Id Content     :  valid userid
+   Firstname parameter :  present
+   Firstname Length    :  > 0
+   Lastname parameter  :  present
+   Lastname Length     :  > 0
+   Email parameter     :  present
+   Email Length        :  > 0
+
+
+Test Case 12 		(Key = 3.1.0.0.0.0.0.0.)
+   HTTP_Verb           :  DELETE
+   User Id Content     :  valid userid
+   Firstname parameter :  <n/a>
+   Firstname Length    :  <n/a>
+   Lastname parameter  :  <n/a>
+   Lastname Length     :  <n/a>
+   Email parameter     :  <n/a>
+   Email Length        :  <n/a>
+

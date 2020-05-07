@@ -1,0 +1,418 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is a Pomodoro Time Tracker.
+  version: 1.0.0
+  title: Pomodoro Time Tracker
+  termsOfService: 'http://swagger.io/terms/'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: user
+    description: Operations related to user
+  - name: project
+    description: Details about projects
+  - name: pomodoro
+    description: Details about pomodoros
+schemes:
+  - https
+  - http
+paths:
+  /project:
+    post:
+      tags:
+      - "project"
+      summary: "Add a new project to user profile"
+      description: "Endpoint for creating a project, so that the user can associate time worked (i.e., Pomodoros) to specific projects."
+      operationId: "addProject"
+      consumes:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Project information"
+          required: true
+          schema:
+            $ref: "#/definitions/Project"
+      produces:
+      - "application/json"
+      responses:
+        201:
+          description: "Created project object"
+          schema:
+           $ref: "#/definitions/Project"
+        400:
+          description: "Bad Request"
+  '/project/{projectId}':
+    delete:
+      tags:
+      - "project"
+      summary: "Delete project by project id"
+      description: "Deletes project by project id; asks user for confirmation if project has time logged to it."
+      operationId: "deleteProject"
+      consumes:
+      - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "projectId"
+          in: "path"
+          description: "ID of project to be deleted"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+           $ref: "#/definitions/Project"
+        '400':
+          description: "Bad Request"
+        '404':
+          description: "Project not found"
+  /pomodoro/start:
+    post:
+      tags:
+        - "pomodoro"
+      summary: "Start a pomodoro"
+      description: "Begins a pomodoro. If a projectId is passed in, the system will create the association, log the starting time, and initialize a counter of the number of (contiguous) Pomodoros completed. Otherwise, the Pomodoro would not be associated to any project."
+      operationId: "pomodorostart"
+      consumes:
+      - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Required for the pomodoro to be associated with a project."
+          required: true
+          schema:
+            $ref: "#/definitions/PomodoroRequest"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Bad Request"
+        404:
+          description: "Project not found"
+  /pomodoro/end:
+    post:
+      tags:
+        - "pomodoro"
+      summary: "Saves completed pomodoro."
+      description: 'To be used when a pomodoro has ended. This increments the number of pomodoros for the corresponding session in the backend'
+      operationId: "pomodoroend"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Indicates which session and project (if specified) the current pomodoro is a part of"
+          required: true
+          schema:
+            $ref: "#/definitions/PomodoroRequest"
+      responses:
+        200:
+          description: "successful operation"
+        204:
+          description: "No Content: Perhaps no current working pomodoro"
+        400:
+          description: "Bad Request"
+  /pomodoro/stop:
+    post:
+      tags:
+        - "pomodoro"
+      summary: "Stops current session of pomodoros."
+      description: 'This endpoint should be used when user wants to mark the end of a series of pomodoros (i.e. session). Not to be used if user is starting another pomodoro. When this endpoint is called, the backend logs the endtime, the number of pomodoros in the session (as calculated by each /pomodoro/end request), to the corresponding session. This takes care of partial pomodoros as they are not counted to the number of pomodoros (as /pomodoro/end is not called), but the endtime is logged.'
+      operationId: "pomodorostop"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Indicates session id, project and user the current session is associated with"
+          required: true
+          schema:
+            $ref: "#/definitions/PomodoroRequest"
+
+      responses:
+        200:
+          description: "successful operation"
+        204:
+          description: "No Content: Perhaps no current working pomodoro"
+        400:
+          description: "Bad Request"
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: "Creates user."
+      description: "Can only be done by admin."
+      operationId: "createUser"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        201:
+          description: "Created user"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Bad Request"
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "Logs user into the system."
+      description: "Logs user into the system."
+      operationId: "loginUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "useremail"
+        in: "query"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Bad Request"
+  /user/logout:
+    post:
+      tags:
+      - "user"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "logoutUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "useremail"
+        in: "query"
+        description: "The user name of user to be logged out"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Bad Request"
+  /user/{useremail}:
+    put:
+      tags:
+      - "user"
+      summary: "Updates user."
+      description: "Updates user information. This can only be done by the administrator."
+      operationId: "updateUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "useremail"
+        in: "path"
+        description: "email of user that needs to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Updated user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Bad Request"
+        404:
+          description: "User not found"
+    delete:
+      tags:
+      - "user"
+      summary: "Delete user."
+      description: "Deletes user. This can only be done by the administrator."
+      operationId: "deleteUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "useremail"
+        in: "path"
+        description: "The email of the user that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Bad Request"
+        404:
+          description: "User not found"
+  /user/{useremail}/projects:
+    get:
+      tags:
+        - "user"
+      summary: "Fetch user projects"
+      description: "Get the list of all projects belonging to user."
+      operationId: userProjects
+      produces:
+        - application/json
+      parameters:
+        - name: "useremail"
+          in: "path"
+          description: "Email of the user"
+          required: true
+          type: "string"
+      responses:
+        '200':
+          description: "Valid input"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Project'
+        '400':
+          description: "Bad Request"
+        '404':
+          description: "User not found"
+  /user/{useremail}/generateReport:
+    get:
+      tags:
+        - "user"
+      summary: "Generate report for project"
+      description: "Report shows sessions logged by user for project."
+      operationId: generatereport
+      produces:
+        - application/json
+      parameters:
+        - name: "useremail"
+          in: "path"
+          description: "Email of user"
+          required: true
+          type: "string"
+        - in: body
+          name: body
+          description: "Report Request Object"
+          required: true
+          schema:
+            $ref: '#/definitions/ReportRequest'
+      responses:
+        '200':
+          description: "Valid input"          
+          schema:
+            $ref: '#/definitions/ReportResponse'
+        '400':
+          description: "Bad request"
+        '404':
+          description: "User not found"
+definitions:
+  Session:
+    type: object
+    properties:
+      session_id:
+        type: integer
+        format: int64
+      project_id:
+        type: integer
+        format: int64
+      start_time:
+        type: integer
+        format: int64
+      end_time:
+        type: integer
+        format: int64
+      time_worked:
+        type: integer
+        format: int64
+      count_pomodoros:
+        type: integer
+        format: int64
+    xml:
+      name: Session
+  Project:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      owner:
+        type: string
+      count_pomodoros:
+        type: integer
+        format: int64
+      current_session:
+        $ref: '#/definitions/Session'
+      all_sessions:
+        type: array
+        items:
+          $ref: '#/definitions/Session'
+    xml:
+      name: Project
+  User:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+    xml:
+      name: User
+  PomodoroRequest:
+    type: object
+    properties:
+      session_id: 
+        type: integer
+        format: int64
+      project_id:
+        type: integer
+        format: int64
+      email:
+        type: string
+  ReportResponse:
+    type: object
+    properties:
+      valid_sessions:
+        type: array
+        items:
+          $ref: '#/definitions/Session'
+      total_pomodoros:
+        type: integer
+        format: int64
+      total_hours:
+        type: integer
+        format: int64
+  ReportRequest:
+    type: object
+    properties:
+      project_id:
+        type: integer
+        format: int64
+      start_timeframe:
+        type: integer
+        format: int64
+      end_timeframe:
+        type: integer
+        format: int64
+  
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /yyu421/Pomtimetracker/1.0.0

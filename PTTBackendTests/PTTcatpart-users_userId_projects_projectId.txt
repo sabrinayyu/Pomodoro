@@ -1,0 +1,41 @@
+# /users/{userId}/projects/{projectId}:
+
+HTTP_Verb:
+	GET. 	
+	PUT. 								[property put]
+	DELETE.
+
+# userId:
+UserId Content:
+	valid userId.
+	invalid userId (PUT). 				[error]
+	invalid userId (DELETE). 			[error]
+	invalid userId (GET). 				[error]
+
+# projectId:
+ProjectId Content:
+	valid projectId.
+	invalid projectId (PUT). 			[error]
+	invalid projectId (DELETE). 		[error]
+	invalid projectId (GET). 			[error]
+
+# Id:
+Id parameter in body:
+	present.							[if put]
+	not present (PUT).					[single]
+
+Id Length in body:
+	0. 									[if put]
+	non_empty.							[if put]
+	
+# projectName:
+Project Name parameter:
+	present.							[if put]
+	not present (PUT).					[error]
+
+Project Name Length:
+	0 (PUT).							[error]
+	non empty.							[if put] 
+
+
+

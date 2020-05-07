@@ -1,0 +1,27 @@
+# /users/{userId}/projects:
+HTTP_Verb:
+	GET.  
+	POST. 											[property post]
+
+User Id Content:
+	valid. 
+	invalid (POST). 								[error]
+	invalid (GET).									[error]
+	
+# Project ID
+Project ID parameter:
+    present. 										[if post]
+    not present (POST). 							[error]
+
+Project ID Length:
+	0.		 										[if post]	
+	non empty. 										[if post]
+
+# Project Name
+Project Name parameter:
+    present.										[if post]
+    not present (POST). 							[error]
+    
+Project Name Length:
+	0 (POST). 										[error]
+	non empty. 										[if post]

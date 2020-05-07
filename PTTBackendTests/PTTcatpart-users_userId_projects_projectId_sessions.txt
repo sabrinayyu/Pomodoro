@@ -1,0 +1,44 @@
+# /users/{userId}/projects/{projectId}/sessions:
+HTTP_Verb:
+	GET.	
+	POST.								[property post]
+
+# userId:
+UserId Content:
+	valid userId. 
+	invalid userId (GET). 				[error]
+	invalid userId (POST). 				[error]
+
+# projectId:
+ProjectId Content:
+	valid projectId.
+	invalid projectId (POST). 			[error]
+	invalid projectId (GET). 			[error]
+
+# startTime:
+Starttime parameter:
+	present.							[if post]
+	not present (POST).					[error]
+
+Starttime Format:
+	valid startTimeformat.				[if post]
+	invalid startTimeformat (POST). 	[error]
+
+# endTime:
+EndTime parameter:
+	present.							[if post]
+	not present (POST).					[error]
+
+EndTime Format:
+	valid startTimeformat.				[if post]
+	invalid startTimeformat (POST). 	[error]
+
+# counter:
+Counter parameter:
+	present.							[if post]
+	not present (POST).					[error]
+
+Counter content:
+	not integer (POST).					[error]
+	>= 0.								[if post]
+	<	0 (POST). 						[error]

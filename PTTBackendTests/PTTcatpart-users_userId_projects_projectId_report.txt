@@ -1,0 +1,41 @@
+# /users​/{userId}​/projects​/{projectId}​/report
+HTTP_Verb:
+	GET.
+
+#from:
+from parameter:
+	present.
+	not present. 								[error]
+
+from parameter format:
+	valid time format.
+	invalid time format. 						[error]
+
+#to:
+to parameter:
+	present.
+	not present. 								[error]
+
+to parameter format:
+	valid time format.
+	invalid time format. 						[error]
+	
+userId content:
+	valid userId.
+	invalid userId. 							[error]
+
+projectId content:
+	valid projectId.
+	invalid projectId. 							[error]
+
+#includeCompletedPomodoros
+includeCompletedPomodoros parameter:
+	true.
+	false.
+	absent
+
+#includeTotalHoursWorkedOnProject
+includeTotalHoursWorkedOnProject parameter:
+	true.
+	false.
+	absent.

@@ -1,0 +1,55 @@
+#/users/{userId}/projects/{projectId}/sessions/{sessionId}
+HTTP_Verb:
+	PUT.
+
+#UserID
+UserID content:
+	valid userId.
+	invalid userId.				[error]
+
+#ProjectID
+ProjectID content:
+	valid projectId.
+	invalid projectId.			[error]
+
+#SessionID
+SessionID content:
+	valid sessionId.
+	invalid sessionId.			[error]
+
+#ID
+Id parameter:
+	present.					
+	not present.				[single]
+
+Id content:
+	non empty. 
+	empty.
+
+#StartTime
+Starttime parameter:
+	present.					
+	not present.				[error]
+
+StartTime content:
+	invalid time format. 		[error]
+	valid time format. 
+
+#EndTime
+Endtime parameter:
+	present.					
+	not present.				[error]
+
+EndTime content:
+	invalid time format. 		[error]
+	valid time format. 
+
+#Counter
+Counter parameter:
+	present.
+	not present.				[error]
+
+Counter content:
+	not integer. 				[error]
+	<0. 						[error]
+	>=0.

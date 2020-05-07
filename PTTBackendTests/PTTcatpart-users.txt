@@ -1,0 +1,40 @@
+# /users:
+HTTP_Verb:
+	GET. 	 						[single]
+	POST.							
+
+# Id:
+Id Parameter:
+	present.
+	not present. 					[error]
+
+Id Length:
+	0 (POST).  		
+	> 0 (POST).						
+	
+# FirstName:
+Firstname Parameter:
+	present.
+	not present (POST). 			[error]
+
+Firstname Length:
+	0 (POST). 						[error]
+	> 0.
+
+#LastName
+Lastname Parameter:
+	present.
+	not present (POST). 			[error]
+
+Lastname Length:
+	0 (POST). 						[error]
+	> 0.
+
+#Email:
+Email Parameter:
+	present.
+	not present (POST). 			[error]
+
+Email Length:
+	0 (POST).		[error]
+	> 0.			
